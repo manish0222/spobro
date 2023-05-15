@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="signin.css">    
+    <title>SPOBRO</title>
+   
+</head>
+<body> 
+    <div class="login"> 
+      <div class="side-image" style="display: flex; justify-content: center; align-items: center;">
+        <!-- <img src="foodgiving-im.png"> -->
+      </div>
+        <div class="login-box">
+            <!-- <div class="logo-image">
+                <img src="feedNeedy logo.png">
+            </div> -->
+            <form name="login_form" id="login_form" method="post" action="sample.html" enctype="multipart/form-data" >
+                <div class="row">
+              
+                  <div class="col-sm-4">
+                      <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="login_email" class="form-control" placeholder="Enter your email">
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="password" >Password</label>
+                        <input type="password" name="password" id="login_password" class="form-control"  placeholder="Enter your password">
+                      </div>
+                      <button type="button" id="login" name="login" class="btn btn-success">Login </button>
+                  </div>
+                  <div class="new-register">
+                    <h3> Not A Member yet ?<a href="signup.html"><u>Sign-Up</u></a></h3>
+                </div>
+            </div>
+        <script type="module">
+           
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+            import { getAuth,  signInWithEmailAndPassword, signOut} from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+            
+            const firebaseConfig = {
+              apiKey: "AIzaSyBDh4UzFF9RErD-xHpQZ5UZFcU9sWQ_BqU",
+              authDomain: "spobro-2640c.firebaseapp.com",
+              projectId: "spobro-2640c",
+              storageBucket: "spobro-2640c.appspot.com",
+              messagingSenderId: "666188504470",
+              appId: "1:666188504470:web:cf45a74b9e07b3ddae91b7",
+              measurementId: "G-Q914ZE86WJ"
+            };
+      
+      
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+            const auth = getAuth();
+            console.log(app);
+            
+      
+            //----- Login code start	  
+            document.getElementById("login").addEventListener("click", function() {
+                var email =  document.getElementById("login_email").value;
+                var password = document.getElementById("login_password").value;
+      
+                signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                  // Signed in 
+                  const user = userCredential.user;
+                  console.log(user);
+                  alert(user.email+" Login successfully!!!");
+                  window.location.href = "home.html";
+                })
+                .catch((error) => {
+                  const errorCode = error.code;
+                  const errorMessage = error.message;
+                  console.log(errorMessage);
+                  alert(errorMessage);
+                });		  		  
+            });
+            if (userAuthenticated) {
+      // redirect to home page
+      
+            }
+      
+          </script>
+        </div>
+        </div>
+</body>
+</html>

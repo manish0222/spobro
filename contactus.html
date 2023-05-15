@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="contactus.css">
+    <title>Contact-Us</title>
+</head>
+<body>
+    <div>
+        <div>
+            <nav class="navbar-expand-lg|md|sm-bg-dark navbar-dark ">
+                <!-- Navbar links -->
+                <!-- <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">lin1</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Link</a>
+                    </li>
+                  </ul>
+                </div> -->
+                <div class="container-fluid" style="background-color: rgb(108, 197, 235);">
+                    <!-- <a class="navbar-brand" href="#"><img src="spobro.jpg" style="height: 50px; margin-right: 5px;">SPOBRO</a> -->
+                    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button> -->
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="donor-fire.html">Donate</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="home.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="home.html">Team</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="contactus.html">Contact-Us</a>
+                        </li>
+                        </ul>
+                    </div>
+                  </div>
+              </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="form-div">
+            <form onsubmit="sendEmail(); reset(); return false">
+                <h2> CONTACT US </h2>
+                <input type="text" id="name" placeholder="Enter Your Name" required>
+                <input type="email" id="email" placeholder="Enter Your Email-id" required>
+                <input type="text" id="phone" placeholder="Enter Your Mobile No." required>
+                <textarea id="message" placeholder="How Can We Help explain your queries to us?" cols="30" rows="10"></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+        function sendEmail()
+        {
+            Email.send({
+                Host : "smtp.elasticemail.com",
+                Username : "dedonaf568@asuflex.com",
+                Password : "7D10415403590F093AB52FEEAAED3CEF4D10",
+                To : 'dedonaf568@asuflex.com',
+                From : 'dedonaf568@asuflex.com',
+                Subject : "user query -",
+                Body :
+                "Name -- " + document.getElementById("name").value +
+                "<br> Email -- " +document.getElementById("email").value +
+                "<br> message -- " +document.getElementById("message").value
+            }).then(
+                message => alert("message sent successfully"),
+                window.location.href="home.html"
+            );
+        }
+    </script>
+</body>
+</html>

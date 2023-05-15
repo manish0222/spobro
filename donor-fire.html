@@ -1,0 +1,215 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="donor-fire.css">
+    <title>Donate</title>
+</head>
+	<body>
+		    <nav class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(134, 164, 232);" >
+        <div class="container-fluid" style="background-color: rgb(157, 98, 215);">
+          <a class="navbar-brand" href="#" style="height: 50px; margin-right: 5px;">SPOBRO</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="home.html">Donate</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="home.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="home.html">Team</a>
+              </li>
+			  <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="contactus.html">Contact-us</a>
+              </li>
+              </ul>
+          </div>
+        </div>
+      </nav>
+	  <!-- <div class="up-image">
+		<img src="feedNeedy logo.png">
+	  </div> -->
+      <div>
+        <br><br><br><br><br><br>
+      </div>
+		<div class="donor-form">
+			<div class="donor-form-1">
+				<label>Address : </label><input id="Address" type="text" placeholder="Enter Your Address" required><br><br>
+				<label>Amount : </label><input id="Amount" type="text" placeholder="Enter Sponsor Amount" required><br><br>
+				<label>Company : </label><input id="Company" type="text" placeholder="Company Name" required><br><br>
+				<label>Contact Details: </label><input id="mobileno" type="text" placeholder="Phone Number" required><br><br>
+			</div>
+			<div class="donor-form-2">
+				<label>Email: </label><input id="Emailid" type="text" placeholder="Email-id" required><br><br>
+				<label>Review : </label><input id="Review" type="text" placeholder="Old Sponsor details" required><br><br>
+				<!-- <label>Quantity : </label><input id="uantity" type="text" placeholder="Quantity of Donation" required><br><br> -->
+				<div class="button-grid">
+					<div class="submit-button">
+						<button id="Insbtn"> SUBMIT </button>
+						<!-- <button id="Selbtn">Select</button> -->
+					</div>
+					<div class="update-button">
+						<button id="Updbtn"> CHANGE </button>
+						<!-- <button id="Delbtn">Delete</button> -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+<script type="module">
+	// Import the functions you need from the SDKs you need
+	import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+	import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
+	// TODO: Add SDKs for Firebase products that you want to use
+	// https://firebase.google.com/docs/web/setup#available-libraries
+
+	// Your web app's Firebase configuration
+	// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+		const firebaseConfig = {
+			apiKey: "AIzaSyBDh4UzFF9RErD-xHpQZ5UZFcU9sWQ_BqU",
+              authDomain: "spobro-2640c.firebaseapp.com",
+              projectId: "spobro-2640c",
+              storageBucket: "spobro-2640c.appspot.com",
+              messagingSenderId: "666188504470",
+              appId: "1:666188504470:web:cf45a74b9e07b3ddae91b7",
+              measurementId: "G-Q914ZE86WJ"
+		}; 
+
+
+	// Initialize Firebase
+
+	const app = initializeApp(firebaseConfig);
+	import { getFirestore, doc, setDoc, addDoc, updateDoc, deleteDoc, getDoc, collection
+	 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+	const db = getFirestore();
+	let Address = document.getElementById("Address");
+	let Amount = document.getElementById("Amount");
+	let Company = document.getElementById("Company");
+	let Contact = document.getElementById("mobileno");
+	let Email = document.getElementById("Emailid");
+	let Review = document.getElementById("Review");
+	// let QuantityBox = document.getElementById("quantity");
+	let Insbtn = document.getElementById("Insbtn");
+	let Selbtn = document.getElementById("Selbtn");
+	let Updbtn = document.getElementById("Updbtn");
+	let Delbtn = document.getElementById("Delbtn");
+
+	async function AddDocument_CustomID() {
+		var ref = collection(db,"Sponsors");
+		await addDoc(
+			ref, {
+				Address: document.getElementById("Address").value,
+				Amount: document.getElementById("Amount").value,
+				Company: document.getElementById("Company").value,
+				Contact: document.getElementById("mobileno").value,
+				Email: document.getElementById("Emailid").value,
+				Review: document.getElementById("Review").value,
+			}
+		)
+
+			.then(() => {
+
+				alert("Added Succesfully");
+				window.location.href="home.html"
+			}
+			)
+			.catch((error) => {
+				alert("unsuccessfull,error:" + error);
+			});
+
+	}
+	// async function AddDocument_CustomID() {
+	// 	var ref = collection(db,"Sponsors");
+	// 	const docref = await setDoc(
+	// 		ref, {
+    //             // NameBox :document.getElementById("name").value,
+    //             // LocalityBox : document.getElementById("locality").value,
+    //             // AddressBox : document.getElementById("address").value,
+    //             // MobileBox : document.getElementById("mobileno").value,
+    //             // FoodBox : document.getElementById("food").value,
+    //             // ShelfBox : document.getElementById("shelf").value,
+    //             // QuantityBox : document.getElementById("quantity").value
+	// 			Address: document.getElementById("Address").value,
+	// 			Amount: document.getElementById("Amount").value,
+	// 			Company: document.getElementById("Company").value,
+	// 			Contact: document.getElementById("mobileno").value,
+	// 			Email: document.getElementById("Emailid").value,
+	// 			Review: document.getElementById("Review").value,
+	// 	}
+	// 	)
+	// 	console.log(Address + Email)
+	// 		.then(() => {
+
+	// 			alert("Donated Succesfully");
+	// 			window.location.href="home.html"
+	// 		}
+	// 		)
+	// 		.catch((error) => {
+	// 			alert("unsuccessfull,error:" + error);
+	// 		});
+
+	// }
+
+	async function UpdateFieldsInaDocument() {
+		var ref = doc(db, "Sponsors", document.getElementById("mobileno").value);
+		await updateDoc(
+			ref, {
+	NameBox :document.getElementById("name").value,
+	 LocalityBox : document.getElementById("locality").value,
+	 AddressBox : document.getElementById("address").value,
+	 MobileBox : document.getElementById("mobileno").value,
+	 FoodBox : document.getElementById("food").value,
+	 ShelfBox : document.getElementById("shelf").value,
+	 QuantityBox : document.getElementById("quantity").value
+		}
+
+
+		).then(() => {
+			alert("Donation Updates Successfully");
+			window.location.href="checkout.html"
+		}
+		).catch((error) => {
+			alert("unsuccessfull,error:" + error);
+		})
+	}
+	// async function deleteAdoc() {
+	// 	var ref = doc(db, "donorlist", document.getElementById("mobileno").value);
+	// 	const docSnap = await getDoc(ref);
+	// 	if (!docSnap.exists()) {
+	// 		alert("document not avaiable");
+	// 		return;
+
+
+	// 	}
+	// 	await deleteDoc(ref)
+	// 		.then(() => {
+	// 			alert("datat deleted successfully");
+
+	// 		}).catch((error) => {
+	// 			alert("unsuccessful op", +error);
+
+	// 		});
+	// }
+	Insbtn.addEventListener("click", AddDocument_CustomID);
+	// Selbtn.addEventListener("click", GetADocument);
+	Updbtn.addEventListener("click", UpdateFieldsInaDocument);
+	// Delbtn.addEventListener("click", deleteAdoc);
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+
+</html>

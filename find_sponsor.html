@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsor page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="find_sponsor.css">
+    <title>Find Sponsor</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(77, 74, 219);" >
+        <div class="container-fluid" style="background-color: rgb(108, 197, 235);">
+          <a class="navbar-brand" href="#"><img src="spobro.jpg" style="height: 50px; margin-right: 5px;">SPOBRO</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="donor-fire.html">Donate</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="home.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="home.html">Team</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="contactus.html">Contact-Us</a>
+              </li>
+              </ul>
+          </div>
+        </div>
+        <script>
+          function Searching()
+         {
+           var input, filter,table, tr, td, id, i, txtValue;
+           input = document.getElementById("myInput");
+           filter = input.value.toUpperCase();
+              table = document.getElementById("table table-warning bg-warning table-hover table-responsive");
+              console.log(input);
+             //alert(filter);
+             //alert(table);
+             tr = table.getElementsByTagName("tr");
+             for(i = 0; i<tr.length; i++)
+           {
+               td= tr[i].getElementsByTagName("td")[2];
+               if(td)
+               {
+                 txtValue = td.textContent || td.innerText;
+                 if(txtValue.toUpperCase().indexOf(filter) > -1)
+                 { 
+                   tr[i].style.display = "";
+                 }
+                 else
+                 {
+                   tr[i].style.display = "none";
+                 }
+               }
+         }
+         }
+       </script>
+      </nav>
+    <h1> Sponsorers Available </h1>
+    <div class="search-bar">
+      <input type = "text" id = "myInput" placeholder="Search Name or Amount" onkeyup=Searching()>
+    </div>
+    <div class=" doctable container mt-3">
+      <div class="table-div">
+        <table class="table table-warning bg-warning table-hover table-responsive" id="table table-warning bg-warning table-hover table-responsive">
+          <thead>
+              <th>No</th>
+              <!-- <th>Name</th> -->
+              <th>Address</th>
+              <th id>Amount</th>
+              <th>Company</th>
+              <th>Contact</th>
+              <!-- <th>Email</th> -->
+              <th>Review</th>
+          </thead>
+          <tbody id="tbody1" class="table-body"></tbody>
+      </table>
+      </div>
+
+    </div>
+    
+    <script type="module">
+          //filling the table
+      var stdNo=0;
+      var tbody=document.getElementById('tbody1');
+
+      function AddItemToTable(Address,Amount,Company,Review){
+        let trow = document.createElement("tr");
+        let td1= document.createElement("td");
+        let td2= document.createElement("td");
+        let td3= document.createElement("td");
+
+        let td5 = document.createElement("td");
+        let td6 = document.createElement("td");
+        let td7 = document.createElement("td");
+        // let td8 = document.createElement("td");
+        let td8 = document.createElement("button");
+        td1.innerHTML = ++stdNo;
+        // td2.innerHTML = ;
+        td3.innerHTML = Address;
+        td5.innerHTML = Amount;
+        td6.innerHTML = Company;
+        td7.innerHTML = Review;
+        td8.innerHTML= "Contact"
+        trow.appendChild(td1);
+        // trow.appendChild(td2);
+        trow.appendChild(td3);
+        trow.appendChild(td5);
+        trow.appendChild(td6);
+        trow.appendChild(td7);
+        // trow.appendChild(td8);
+        trow.appendChild(td8);
+        tbody.appendChild(trow);
+
+        td8.setAttribute("id",stdNo);
+        td8.setAttribute("onclick",TheConfirm);
+        td8.onclick=TheConfirm;
+
+        function TheConfirm(){
+          // const mobNo=document.getElementById(mobileno).id;
+          // localStorage.setItem('mobNo',mobNo);
+          window.location.href="emailus.html";
+        }
+    }
+
+    
+    
+    function addAllDataToTable(studentDocList){
+        stdNo=0;
+        tbody1.innerHTML="";
+        studentDocList.forEach(element =>{
+            AddItemToTable(element.Address,element.Amount,element.Company,element.Review);
+        });
+    }
+	// Import the functions you need from the SDKs you need
+	import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    // import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+	import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
+
+        const firebaseConfig = {
+			apiKey: "AIzaSyBDh4UzFF9RErD-xHpQZ5UZFcU9sWQ_BqU",
+              authDomain: "spobro-2640c.firebaseapp.com",
+              projectId: "spobro-2640c",
+              storageBucket: "spobro-2640c.appspot.com",
+              messagingSenderId: "666188504470",
+              appId: "1:666188504470:web:cf45a74b9e07b3ddae91b7",
+              measurementId: "G-Q914ZE86WJ"
+		}; 
+     
+    const app = initializeApp(firebaseConfig); 
+    
+    import { getFirestore, doc, setDoc, addDoc, updateDoc,getDocs, deleteDoc, getDoc, collection } 
+    from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+    const db=getFirestore();
+
+   	async function getDataRealTime() {
+		const querySnapshot = await getDocs(collection(db,"Sponsors"));
+		
+        var students = [];
+		
+        querySnapshot.forEach(doc => {
+            students.push(doc.data());
+
+        });
+        addAllDataToTable(students);
+	}
+
+    window.onload = getDataRealTime;
+    </script>
+    
+</body>
+</html>
